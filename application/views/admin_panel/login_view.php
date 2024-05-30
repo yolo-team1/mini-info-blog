@@ -156,7 +156,7 @@
         </div>
       <?php } ?>
     <img class="mb-4" src="<?php echo base_url() ?>assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 fw-normal">$Yolo Team = 1</h1>
     <div class="form-floating">
       <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
       <label for="floatingInput">Username</label>
