@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Dashboard Blog</title>
+    <title>Blog Panel</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -14,6 +14,32 @@
 <link href="<?php echo base_url() ?>/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+      /* Pagination styles */
+      .pagination {
+        display: flex;
+        padding: 1em 0;
+      }
+
+      .pagination a,
+      .pagination strong {
+        border: 1px solid silver;
+        border-radius: 8px;
+        color: black;
+        padding: 0.5em;
+        margin-right: 0.5em;
+        text-decoration: none;
+      }
+
+      .pagination a:hover,
+      .pagination strong {
+        border: 1px solid #008cba;
+        background-color: #008cba;
+        color: white;
+      }
+      
+      .sliding-card {
+        display: none;
+      }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -202,29 +228,16 @@
 </svg>
 
 <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Sistem Blog Informasi</a>
-
-  <ul class="navbar-nav flex-row d-md-none">
-    <li class="nav-item text-nowrap">
-      <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
-        <svg class="bi"><use xlink:href="#search"/></svg>
-      </button>
-    </li>
-    <li class="nav-item text-nowrap">
-      <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <svg class="bi"><use xlink:href="#list"/></svg>
-      </button>
-    </li>
-  </ul>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="<?= base_url().'admin/dashboard'?>">Sistem Blog Informasi</a>
 
   <div id="navbarSearch" class="navbar-search w-100 collapse">
     <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
   </div>
 </header>
 
-<div class="container-fluid">
+<div class="container-fluid h-auto">
   <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    <div class="sidebar border border-right col-md-3 col-lg-2 py-4 bg-body-tertiary h-100">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
@@ -244,6 +257,13 @@
                 Tambah Artikel
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="<?= base_url().'admin/logs'?>">
+                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                Log Aktifitas
+              </a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="<?= base_url().'admin/blog'?>">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
