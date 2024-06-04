@@ -89,6 +89,10 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+
+      .alert {
+        display: none;
+      }
     </style>
 
     
@@ -148,22 +152,28 @@
     </div>
 
     
-<main class="form-signin w-100 m-auto">
-  <form class="form-signin" method="post" action="<?php echo base_url() ?>admin/login/login_post">
-      <?php if ($error != 'NO_ERROR') { ?>
-        <div class="alert alert-danger" role="alert">
-          <?php echo $error; ?>
+<main class="form-signin w-auto m-auto">
+  <form class="form-signin w-auto" method="post" action="<?php echo base_url() ?>admin/login/login_post">
+      <?php if ($this->session->flashdata('message')): ?>
+        <div class="alert alert-info">
+        <?php echo $this->session->flashdata('message'); ?>
         </div>
-      <?php } ?>
+      <?php elseif($this->session->flashdata('error')): ?>
+        <div class="alert alert-danger">
+        <?php echo $this->session->flashdata('error'); ?>
+        </div>
+      <?php endif; ?> 
     <img class="mb-4" src="<?php echo base_url() ?>assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">$Yolo Team = 1</h1>
     <div class="form-floating">
       <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
       <label for="floatingInput">Username</label>
+      <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
       <label for="floatingPassword">Password</label>
+      <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
     </div>
 
     <div class="form-check text-start my-3">
@@ -172,11 +182,19 @@
         Remember me
       </label>
     </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-body-secondary">Copyright &copy; 2024 Kelompok 1.<br> All Right Reserved</p>
+    <button class="btn btn-primary w-100 py-2" type="submit">Masuk</button>
+    <a href="<?php echo base_url() ?>admin/signup" class="btn btn-secondary w-100 py-2 mt-2">Daftar</a>
+
+    <p class="mt-5 mb-3 text-body-secondary">Copyright &copy; 2024 Kelompok 1. All Right Reserved</p>
   </form>
 </main>
 <script src="<?php echo base_url() ?>assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo base_url() ?>assets/js/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".alert").slideDown(300).delay(5000).slideUp(300);
+    });
+</script>
 
     </body>
 </html>
