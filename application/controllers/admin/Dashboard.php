@@ -3,28 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/userguide3/general/urls.html
-	 */
+	public function __construct()
+    {
+        parent::__construct();
+        cek_login();
+    }
+
 	public function index()
-	{
-		if (isset($_SESSION['user_id'])) {
-			$this->load->view('admin_panel/dashboard_view');
-		}
-		else {
-			redirect('admin/login');
+	{	if ($_SESSION['username'] == 'Administrator') {
+		$query = $this->db->query("SELECT * FROM `blog`");
+		$data['jumlah_artikel'] = $query->num_rows();
+		$data['user'] = $this->db->query("SELECT * FROM `backenduser` WHERE `uid` != 1")->result_array();
+		$data['logs'] = $this->db->query("SELECT * FROM `activity_logs` ORDER BY `created_at` DESC LIMIT 10")->result_array();
+		$data['jumlah_terpublish'] = $this->db->query("SELECT * FROM `blog` WHERE `status` = 1")->num_rows();
+		$data['jumlah_unpublish'] = $this->db->query("SELECT * FROM `blog` WHERE `status` = 0")->num_rows();
+		$this->load->view('admin_panel/dashboard_view', $data);
+		} else {
+			$query = $this->db->query("SELECT * FROM `blog` WHERE `penulis` = '".$_SESSION['username']."'");
+			$data['jumlah_artikel'] = $query->num_rows();
+			$data['user'] = $this->db->query("SELECT * FROM `backenduser` WHERE `name` = '".$_SESSION['username']."'")->result_array();
+			$data['logs'] = $this->db->query("SELECT * FROM activity_logs WHERE user IN ('".$_SESSION['username']."', 'Administrator') ORDER BY `created_at` DESC LIMIT 10")->result_array();
+			$data['jumlah_terpublish'] = $this->db->query("SELECT * FROM `blog` WHERE `status` = 1 AND `penulis` = '".$_SESSION['username']."'")->num_rows();
+			$data['jumlah_unpublish'] = $this->db->query("SELECT * FROM `blog` WHERE `status` = 0 AND `penulis` = '".$_SESSION['username']."'")->num_rows();
+			$this->load->view('admin_panel/dashboard_view', $data);
 		}
 	}
 }
