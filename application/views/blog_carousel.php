@@ -14,7 +14,7 @@
             foreach ($chunk as $key => $value): ?>
                 <?php foreach ($value as $key => $value): ?>
                     <div <?php echo $key == 0 ? 'class="carousel-item active"' : 'class="carousel-item"'; ?>" data-bs-theme="light">
-                    <img src="<?= base_url().$value['blog_img']?>" class="img-fluid img-thumbnail"  alt="<?php echo $value['blog_title']?>" width="100%" height="100%" style="filter:brightness(70%);"  focusable="false">
+                    <img src="<?= base_url().$value['blog_img']?>" class="img-fluid"  alt="<?php echo $value['blog_title']?>" width="100%" height="100%" style="filter:brightness(70%);"  focusable="false">
                     <div class="container" data-bs-theme="light">
                         <div class="carousel-caption text-start" data-bs-theme="light">
                             <h1 style="text-shadow: 2px 2px 4px grey;" data-bs-theme="light"><?php echo $value['blog_title']?></h1>
