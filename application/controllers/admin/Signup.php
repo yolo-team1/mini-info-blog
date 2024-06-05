@@ -32,6 +32,14 @@ class Signup extends CI_Controller {
             'matches' => 'Konfirmasi Password tidak sesuai dengan Password'
         ]);
 
+        // Cek username sudah digunakan atau belum
+        $this->db->where('username', $this->input->post('username'));
+        $user = $this->db->get('backenduser')->row_array();
+        if ($user) {
+            $this->session->set_flashdata('error', 'Akun sudah terdaftar, silahkan gunakan username lain');
+            redirect('admin/signup');
+        }
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin_panel/signup_view');
         } else {
