@@ -146,37 +146,39 @@
   <div class="album py-5 bg-body-tertiary" id="artikel">
     <h1 class="display-2 text-center mb-5">Artikel Terbaru</h1>
     <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <?php 
         $count = 0;
         foreach ($artikel as $key => $value) {
-          if ($count >= 6) {
-            break;
-          }
-          ?> 
-          <div class="col">
-            <div class="card shadow-sm h-100">
-              <img src="<?= base_url().$value['blog_img']?>" class="img-fluid img-thumbnail" alt="...">
-              <div class="card-body">
-                <p <?php echo $value['kategori'] == 'Umum' ? 'class="badge rounded-pill text-bg-primary"' : ($value['kategori'] == 'Pengumuman' ? 'class="badge rounded-pill text-bg-warning"' : 'class="badge rounded-pill text-bg-danger"') ?> ><?= $value['kategori'] ?></p>
-                <hr style="height:3px;border:none;color:red;background-color:red;margin:0px;margin-bottom:4px;">
-                <p class="card-text align-bottom"><?= $value['blog_title'] ?></p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="<?= base_url().'home/blog_detail/'.$value['blog_id'] ?>" type="button" class="btn btn-sm btn-outline-secondary position-sticky bottom-0 start-0">Baca Selengkapnya</a>
-                  </div>
-                  <?php $date = date_create($value['created_on']); ?>
-                  <small class="text-body-secondary"><?php echo date_format($date,"d-M-Y H:i");?></small>
+            if ($count >= 6) {
+                break;
+            }
+        ?>
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div style="overflow: hidden;">
+                        <img src="<?= base_url() . $value['blog_img'] ?>" class="card-img-top img-fluid" style="object-fit: cover; object-position: center; height: 200px;" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <p <?php echo $value['kategori'] == 'Umum' ? 'class="badge rounded-pill text-bg-primary"' : ($value['kategori'] == 'Pengumuman' ? 'class="badge rounded-pill text-bg-warning"' : 'class="badge rounded-pill text-bg-danger"') ?> ><?= $value['kategori'] ?></p>
+                        <hr style="height:3px;border:none;color:red;background-color:red;margin:0px;margin-bottom:4px;">
+                        <p class="card-text align-bottom"><?= $value['blog_title'] ?></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="<?= base_url() . 'home/blog_detail/' . $value['blog_id'] ?>" type="button" class="btn btn-sm btn-outline-secondary position-sticky bottom-0 start-0">Baca Selengkapnya</a>
+                            </div>
+                            <?php $date = date_create($value['created_on']); ?>
+                            <small class="text-body-secondary"><?php echo date_format($date, "d-M-Y H:i"); ?></small>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <?php
-          $count++;
+        <?php
+            $count++;
         }   
         ?>
       </div>
-      <center><a type="button" class="btn btn-outline-primary btn-lg btn-block w-auto mt-4" href="<?php echo base_url()?>home/blog_get_all">Lihat Semua Artikel</a></center>
+      <center><a type="button" class="btn btn-primary btn-lg btn-block w-auto mt-4" href="<?php echo base_url()?>home/blog_get_all">Lihat Semua Artikel</a></center>
     </div>
   </div>
 </main>
